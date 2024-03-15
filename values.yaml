@@ -6,9 +6,10 @@ replicaCount: 1
 
 image:
   repository: gitlab-registry.collaborationlayer-traton.com/ats-project/ats-user-group/scania-thesis-students-ats/manish-master-thesis/fullstack-multiplayer:latest
+  
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: {{ .Chart.AppVersion }}
 
 imagePullSecrets:
   - name: gitlab-token-auth
