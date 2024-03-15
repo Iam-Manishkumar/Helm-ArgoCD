@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: myapp-service
+  name: {{ include "nodejsapp-chart.fullname" . }}
+  labels:
+    {{- include "nodejsapp-chart.labels" . | nindent 4 }}
 spec:
-  selector:
-    app: myapp
+  type: {{ .Values.service.type }}
   ports:
-  - port: 3000
-    protocol: TCP
-    targetPort: 3000
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "nodejsapp-chart.selectorLabels" . | nindent 4 }}
